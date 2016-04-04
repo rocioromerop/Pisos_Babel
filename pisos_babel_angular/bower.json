@@ -1,0 +1,24 @@
+{
+  "name": "pisos_babel_angular",
+  "homepage": "https://github.com/rocioromerop/Pisos_Babel",
+  "authors": [
+    "Rocio Romero <rocio.romero@babel.es>"
+  ],
+  "description": "parte front de pisos_babel",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.3",
+    "bootstrap": "^3.3.6",
+    "angular-route": "^1.5.3",
+    "moment": "^2.12.0"
+  }
+}

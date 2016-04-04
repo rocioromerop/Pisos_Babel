@@ -1,0 +1,14 @@
+{
+  "name": "pisos_babel_angular",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Rocio Romero",
+  "license": "ISC",
+  "dependencies": {
+    "grunt": "^0.4.5"
+  }
+}
