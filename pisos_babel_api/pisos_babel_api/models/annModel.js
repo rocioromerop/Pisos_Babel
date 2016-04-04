@@ -10,13 +10,16 @@ var mongoose = require('mongoose');
 var annSchema = mongoose.Schema({
 	codigoPostal: Number,
 	calle: String,
-	Ciudad: String,
+	ciudad: String,
 	compra: Boolean,
 	precio: Number,
-	fotos: [String],
+	metros: Number,
+	numeroHabitaciones: Number,
+	amueblado: Boolean,
 	descripcion: String,
-	fechaSubida: Number,
-	usuarioSubida: String
+	fechaSubida: String,
+	usuarioSubida: String,
+	fotos: [String]
 });
 
 // al esquema le metemos un estático
@@ -48,7 +51,7 @@ annSchema.statics.list = function(start, limit, filters, sort,  cb){
 };
 
 // Al modelo le metemos el esquema
-var ann = mongoose.model('Anuncio', annSchema);
+var Anuncio = mongoose.model('Anuncio', annSchema);
 
 // Métodos del modelo
 var anuncio = {
