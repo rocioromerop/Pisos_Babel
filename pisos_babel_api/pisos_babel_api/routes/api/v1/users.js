@@ -23,44 +23,8 @@ router.get('/', function(req, res) {
     });
 });
 
-router.get('/:comprobar', function(req, res) {
-    var usuarioAComprobar = req.body.name;
-    var contraseñaUsuarioAComprobar = req.body.pass;
-    var i=0;
-    User.list({}, 'name', function(err, rows) {
-        if (err) {
-            return res.json({ result: false, err: err });
-        }
-        if (rows.length != 0) {
-            var prueba = false;
-            for (i in rows) {
-                console.log("usuarioAComprobar: ", usuarioAComprobar);
-                console.log("rows[i].name: ", rows[i].name);
-                if (rows[i].name == usuarioAComprobar) {
-                    console.log("ENTRO AQUI");
-                    prueba = true;
-                }
-            }
-            if (prueba == false) {
-                return res.json({ result: false, row: "El usuario y contraseña no coinciden" })
-            } else {
-                let sha256 = crypto.createHash("sha256");
-                sha256.update(contraseñaUsuarioAComprobar, "utf8"); //utf8 here
-                let passConHash = sha256.digest("base64");
-                if (rows[i].pass == passConHash) {
-                    return res.json({ result: true, row: "usuario autenticado correctamente" })
-                }
-            }
-        } 
-        else {
-            return res.json({ result: false, row: 'El usuario no existe en el sistema' })
-        }
-    })
-});
-
 //llamarlo con name y pass
 router.post('/', function(req, res) {
-
     //quiero poner el hash a la pass primero, y luego ya guardar lo obtenido
     var usuario = {};
     var pass = req.body.pass;

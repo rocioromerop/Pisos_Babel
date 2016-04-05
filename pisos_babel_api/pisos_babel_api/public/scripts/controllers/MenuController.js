@@ -1,5 +1,5 @@
 angular.module("pisosBabel").controller("MenuController", ["$scope", "$location", "$rootScope", "paths", 
-    function($scope, $location, $rootScope, paths) {
+    function($scope, $location, $rootScope, paths, AuthService) {
 
         //Scope init
         $scope.model = {
@@ -10,7 +10,6 @@ angular.module("pisosBabel").controller("MenuController", ["$scope", "$location"
         $scope.paths = paths;
 
         //Scope methods
-
 
         $scope.getClassForItem = function(item) {
             if ($scope.model.selectedItem == item) {
