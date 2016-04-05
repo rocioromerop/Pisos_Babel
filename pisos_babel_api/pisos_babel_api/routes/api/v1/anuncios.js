@@ -149,7 +149,7 @@ router.post('/', function(req, res) {
 
 	let anuncioAgregar = {};
 
-	//Coger los elementos a añadir del anuncio
+	// Coger los elementos a añadir del anuncio
 
 	let currentDate = new Date();
 

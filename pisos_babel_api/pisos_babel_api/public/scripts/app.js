@@ -3,13 +3,13 @@ angular.module('pisosBabel', ["ngRoute", "URL"]).config(
         // Configuro las URLs de la aplicación
         $routeProvider
         .when(paths.login, {
-            templateUrl: 'views/Login.html'
+            templateUrl: 'views/login.html'
         })
         .when(paths.logout, {
-            templateUrl: 'views/Logout.html'
+            templateUrl: 'views/logout.html'
         })
         .when(paths.register, {
-            templateUrl: 'views/Register.html'
+            templateUrl: 'views/register.html'
         })
         .when(paths.anuncios, {
             templateUrl: 'views/anunciosList.html'

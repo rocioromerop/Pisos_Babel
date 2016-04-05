@@ -1,5 +1,5 @@
 angular.module("pisosBabel").value("apiPaths", {
-    pisos: "/api/pisos",
-    pisoDetail: "/api/pisos/:id",
-    usuarios: "/api/users",
+    pisos: "/api/v1/anuncios",
+    pisoDetail: "/api/v1/anuncios/:id",
+    usuarios: "/api/v1/users",
 });

@@ -1,0 +1,29 @@
+<div ng-controller="registerController">
+    <h1>Registro</h1>
+    <div ng-show="uiState=='success'" class="alert alert-success" role="alert">Usuario creado correctamente! :D</div>
+    <div ng-show="uiReg=='yaRegistrado'" class="alert alert-danger" role="alert">El usuario ya existe en el sistema, por favor, elige otro</div>
+    <div ng-show="uiState=='loading'" class="alert alert-info" role="alert">Cargando...</div>
+    <form name="registroForm" novalidate class="form-horizontal" ng-submit="register()" ng-show="uiState=='ideal'">
+        <div class="form-group" ng-class="{ 'has-success': registroForm.name.$valid, 'has-error': registroForm.name.$invalid && registroForm.name.$dirty}">
+            <label for="usuario" class="col-sm-2 control-label">Usuario</label>
+            <div class="col-sm-10">
+                <input type="text" name="name" ng-model="model.name" class="form-control" required>
+                <div class="text-danger" ng-show="movieForm.name.$dirty && movieForm.name.$error.required">
+                    El usuario es obligatorio
+                </div>
+            </div>
+        </div>
+        <div class="form-group" ng-class="{ 'has-success': registroForm.pass.$valid, 'has-error': registroForm.pass.$invalid && registroForm.pass.$dirty}">
+            <label for="pass" class="col-sm-2 control-label">Contraseña</label>
+            <div class="col-sm-10">
+                <input type="text" name="pass" ng-model="model.pass" class="form-control" required>
+                <div class="text-danger" ng-show="registroForm.pass.$dirty && registroForm.pass.$error.required">
+                    La contraseña es obligatoria
+                </div>
+            </div>
+        </div>
+        <div>
+            <button class="btn btn-primary pull-right" type="submit" ng-disabled="movieForm.$invalid">Registrarse</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,115 @@
+<div ng-controller="newAnuncioController">
+    <h1>Añadir Anuncio</h1>
+    <div ng-show="uiState=='error'">Ha ocurrido un error!</div>
+    <form name="anuncioForm" novalidate class="form-horizontal" ng-submit="saveAnuncio()" ng-show="uiState=='ideal'">
+        <div class="form-group" ng-class="{ 'has-success': anuncioForm.calle.$valid, 'has-error': anuncioForm.calle.$invalid && anuncioForm.calle.$dirty}">
+            <label for="calle" class="col-sm-2 control-label">Calle</label>
+            <div class="col-sm-10">
+                <input type="text" name="calle" ng-model="model.calle" class="form-control" required>
+                <div class="text-danger" ng-show="anuncioForm.calle.$dirty && anuncioForm.calle.$error.required">
+                    El nombre de la calle es obligatorio
+                </div>
+            </div>
+        </div>
+        <div class="form-group" ng-class="{ 'has-success': anuncioForm.codigoPostal.$valid, 'has-error': anuncioForm.codigoPostal.$invalid && anuncioForm.codigoPostal.$dirty}">
+            <label for="codigoPostal" class="col-sm-2 control-label">Código Postal</label>
+            <div class="col-sm-10">
+                <input type="number" name="codigoPostal" ng-model="model.codigoPostal" class="form-control" required>
+                <div class="text-danger" ng-show="anuncioForm.codigoPostal.$dirty && anuncioForm.codigoPostal.$error.required">
+                    El código postal es obligatorio
+                </div>
+            </div>
+        </div>
+        <div class="form-group" ng-class="{ 'has-success': anuncioForm.ciudad.$valid, 'has-error': anuncioForm.ciudad.$invalid && anuncioForm.ciudad.$dirty}">
+            <label for="ciudad" class="col-sm-2 control-label">Ciudad</label>
+            <div class="col-sm-10">
+                <input type="text" name="ciudad" ng-model="model.ciudad" class="form-control" required>
+                <div class="text-danger" ng-show="anuncioForm.ciudad.$dirty && anuncioForm.ciudad.$error.required">
+                    Es obligatorio introducir la ciudad
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="compra" class="col-sm-2 control-label">Venta o alquiler</label>
+            <div class="col-sm-10">
+                <div class="radio" ng-model="model.compra" class="form-control">
+                    <label>
+                        <input type="radio" name="opciones1" id="opciones_1" value="opcion_1" ng-checked> El anuncio es para vender
+                    </label>
+                </div>
+                <div class="radio" ng-model="model.compra" class="form-control">
+                    <label>
+                        <input type="radio" name="opciones1" id="opciones_2" value="opcion_2"> El anuncio es para alquilar
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" ng-class="{ 'has-success': anuncioForm.precio.$valid, 'has-error': anuncioForm.precio.$invalid && anuncioForm.precio.$dirty}">
+            <label for="precio" class="col-sm-2 control-label">Precio</label>
+            <div class="col-sm-10">
+                <input type="number" name="precio" ng-model="model.precio" class="form-control" required>
+                <div class="text-danger" ng-show="anuncioForm.precio.$dirty && anuncioForm.precio.$error.required">
+                    Es obligatorio introducir el precio
+                </div>
+            </div>
+        </div>
+        <div class="form-group" ng-class="{ 'has-success': anuncioForm.metros.$valid, 'has-error': anuncioForm.metros.$invalid && anuncioForm.metros.$dirty}">
+            <label for="metros" class="col-sm-2 control-label">Metros</label>
+            <div class="col-sm-10">
+                <input type="number" name="metros" ng-model="model.metros" class="form-control" required>
+                <div class="text-danger" ng-show="anuncioForm.metros.$dirty && anuncioForm.metros.$error.required">
+                    Es obligatorio introducir los metros
+                </div>
+            </div>
+        </div>
+        <div class="form-group" ng-class="{ 'has-success': anuncioForm.numeroHabitaciones.$valid, 'has-error': anuncioForm.numeroHabitaciones.$invalid && anuncioForm.numeroHabitaciones.$dirty}">
+            <label for="numeroHabitaciones" class="col-sm-2 control-label">Número de habitaciones</label>
+            <div class="col-sm-10">
+                <input type="number" name="numeroHabitaciones" ng-model="model.numeroHabitaciones" class="form-control" required>
+                <div class="text-danger" ng-show="anuncioForm.numeroHabitaciones.$dirty && anuncioForm.numeroHabitaciones.$error.required">
+                    Es obligatorio introducir el número de habitaciones
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="amueblado" class="col-sm-2 control-label">Amueblado</label>
+            <div class="col-sm-10">
+                <div class="radio" ng-model="model.amueblado" class="form-control">
+                    <label>
+                        <input type="radio" name="opciones2" id="opciones_1" value="opcion_1" ng-checked> Amueblado
+                    </label>
+                </div>
+                <div class="radio" ng-model="model.amueblado" class="form-control">
+                    <label>
+                        <input type="radio" name="opciones2" id="opciones_2" value="opcion_2"> No amueblado
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="descripcion" class="col-sm-2 control-label">Descripción</label>
+            <div class="col-sm-10">
+                <textarea name="descripcion" ng-model="model.descripcion" class="form-control" rows="10" required></textarea>
+                <div class="text-danger" ng-show="anuncioForm.descripcion.$dirty && anuncioForm.descripcion.$error.required">
+                    La descripción es obligatoria
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="fotos" class="col-sm-2 control-label">URL de las fotos, separadas por comas</label>
+            <div class="col-sm-10">
+                <input type="url" name="fotos" ng-model="model.fotos" class="form-control" required>
+                <div class="text-danger" ng-show="movieForm.fotos.$dirty && movieForm.fotos.$error.required">
+                    The poster URL is required.
+                </div>
+                <div class="text-danger" ng-show="movieForm.fotos.$dirty && movieForm.fotos.$error.url">
+                    The poster URL is invalid.
+                </div>
+            </div>
+        </div>
+        <div>
+            <button class="btn btn-primary pull-right" type="submit" ng-disabled="anuncioForm.$invalid">Crear</button>
+        </div>
+        
+    </form>
+</div>

@@ -15,6 +15,5 @@ angular.module("pisosBabel").controller("AppController", ["$scope", "$location",
         };
 
         //Scope event listeners
-        
     }
 ]);

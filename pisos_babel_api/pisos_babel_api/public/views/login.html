@@ -1,0 +1,16 @@
+<div class="container" ng-controller="loginController">
+    <h1 type="text">Autenticación:</h1>
+    <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">Usuario</span>
+        <input type="text"  ng-model="model.name" class="form-control" placeholder="Usuario" aria-describedby="basic-addon1">
+    </div>
+    <p></p>
+    <div class="input-group">
+        <span class="input-group-addon">Contraseña</span>
+        <input type="text" ng-model="model.pass" class="form-control" placeholder="Contraseña" aria-describedby="basic-addon1">
+    </div>
+    <p></p>
+    <div>
+        <button type="button" class="btn btn-primary pull-right" ng-click="conectarse()">Conectarse</button>
+    </div>
+</div>

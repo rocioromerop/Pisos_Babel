@@ -23,6 +23,41 @@ router.get('/', function(req, res) {
     });
 });
 
+router.get('/:comprobar', function(req, res) {
+    var usuarioAComprobar = req.body.name;
+    var contraseñaUsuarioAComprobar = req.body.pass;
+    var i=0;
+    User.list({}, 'name', function(err, rows) {
+        if (err) {
+            return res.json({ result: false, err: err });
+        }
+        if (rows.length != 0) {
+            var prueba = false;
+            for (i in rows) {
+                console.log("usuarioAComprobar: ", usuarioAComprobar);
+                console.log("rows[i].name: ", rows[i].name);
+                if (rows[i].name == usuarioAComprobar) {
+                    console.log("ENTRO AQUI");
+                    prueba = true;
+                }
+            }
+            if (prueba == false) {
+                return res.json({ result: false, row: "El usuario y contraseña no coinciden" })
+            } else {
+                let sha256 = crypto.createHash("sha256");
+                sha256.update(contraseñaUsuarioAComprobar, "utf8"); //utf8 here
+                let passConHash = sha256.digest("base64");
+                if (rows[i].pass == passConHash) {
+                    return res.json({ result: true, row: "usuario autenticado correctamente" })
+                }
+            }
+        } 
+        else {
+            return res.json({ result: false, row: 'El usuario no existe en el sistema' })
+        }
+    })
+});
+
 //llamarlo con name y pass
 router.post('/', function(req, res) {
 
@@ -68,29 +103,28 @@ router.post('/', function(req, res) {
 
 router.put('/:id', function(req, res) {
     var options = {};
-    User.findOne({_id: req.params.id}, function(err, rows){
-      if(err){
-        return res.json({result: false, err: err}); // error en la base de datos
-      }
-        if(rows == null){ //no existe este usuario
-            return res.json({result: false, err: "El usuario no existe (el id pasado no corresponde con ningun usuario"})
+    User.findOne({ _id: req.params.id }, function(err, rows) {
+        if (err) {
+            return res.json({ result: false, err: err }); // error en la base de datos
         }
-        else{ // sí que existe este usuario
-            User.update({_id: req.params.id}, {$push: req.body}, options, function(err, data){
-                if(err){
-                    return res.json({result: false, err:err});
+        if (rows == null) { //no existe este usuario
+            return res.json({ result: false, err: "El usuario no existe (el id pasado no corresponde con ningun usuario" })
+        } else { // sí que existe este usuario
+            User.update({ _id: req.params.id }, { $push: req.body }, options, function(err, data) {
+                if (err) {
+                    return res.json({ result: false, err: err });
                 }
-                return res.json({result:true, row: data});
+                return res.json({ result: true, row: data });
             });
         }
     });
-});    
+});
 
-router.delete('/:id', function(req, res){
+router.delete('/:id', function(req, res) {
     let nombre = req.params.nombre;
-    User.remove({_id: req.params.id}, function(err){
-        if(err) return res.json({result: false, err: 'No se ha podido eliminar el usuario (ha ocurrido un problema en la base de datos, o el usuario no existe'});
-        res.json({result: true, resp: "Usuario eliminado correctamente"});
+    User.remove({ _id: req.params.id }, function(err) {
+        if (err) return res.json({ result: false, err: 'No se ha podido eliminar el usuario (ha ocurrido un problema en la base de datos, o el usuario no existe' });
+        res.json({ result: true, resp: "Usuario eliminado correctamente" });
         return;
     });
 });
