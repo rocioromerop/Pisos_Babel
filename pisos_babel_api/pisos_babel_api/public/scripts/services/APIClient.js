@@ -57,8 +57,7 @@ angular.module("pisosBabel").service("APIClient", ["$http", "$q", "$filter", "ap
 
         this.comprobarUsuario = function(user) {
             var deferred = $q.defer();
-            var url = apiPaths.usuarios + '/comprobar';
-            $http.get(url, user).then(
+            $http.post(apiPaths.usuarios, user).then(
                 function(response) {
                     deferred.resolve(response.data);
                     console.log("1")

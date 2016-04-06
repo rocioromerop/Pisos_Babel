@@ -25,21 +25,43 @@ router.get('/', function(req, res) {
 
 //llamarlo con name y pass
 router.post('/', function(req, res) {
+
+    var authentic = req.body.authentic;
+
     //quiero poner el hash a la pass primero, y luego ya guardar lo obtenido
     var usuario = {};
     var pass = req.body.pass;
     let filters = {};
     filters.name = req.body.name;
     //comprobar si existe ese nombre en la base de datos primero!
+
+    console.log("req.bodyy: ", req.body);
     User.list(filters, 'name', function(err, rows) {
         if (err) {
             res.json({ result: false, err: err });
             return;
         }
         if (rows.length !== 0) {
-            res.json({ result: false, err: "El usuario ya está registrado" });
-            return;
+            if(authentic === 'true'){
+                if(rows[0].name === req.body.name){ //coincide el nombre, ahora comprobar la contraseña, que ya me viene hasheada
+                    let sha256 = crypto.createHash("sha256");
+                    sha256.update(req.body.pass, "utf8"); //utf8 here
+                    let passConHash = sha256.digest("base64");
+                    if(passConHash === rows[0].pass){
+                        return res.json({result: true, rows: "El usuario y la contraseña coinciden en la base de datos, usuario autenticado correctamente"})
+                    }
+                    return res.json({result: false, err: "La contraseña o el nombre de usuario no coinciden"})
+                }
+                 return res.json({result: false, err: "La contraseña o el nombre de usuario no coinciden (2)"})
+            }
+            else{
+                res.json({ result: false, err: "El usuario ya está registrado" });
+                return;
+            }
         } else {
+            if(authentic === 'true'){
+                return res.json({result: false, err: "El usuario no se encuentra en la base de datos"})
+            }
             let sha256 = crypto.createHash("sha256");
             sha256.update(pass, "utf8"); //utf8 here
             let passConHash = sha256.digest("base64");
@@ -62,6 +84,8 @@ router.post('/', function(req, res) {
         return;
     });
 });
+
+
 
 // para modificar el usuario (en una primera versión, sólo podré modificar los valores de mis anuncios y mis favoritos): me tienen que pasar el usuario (id del usuario) y los nuevos valores a modificar
 

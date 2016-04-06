@@ -4,7 +4,7 @@ angular.module("pisosBabel").controller("loginController", ["$scope", "AuthServi
 
 	$scope.conectarse = function(){
 		// llamará al servicio para autenticar al usuario
-		console.log($scope.model);
+		$scope.model.authentic = 'true';
 		AuthService.loginUser($scope.model);
 		$scope.uiState = 'success';
 	}

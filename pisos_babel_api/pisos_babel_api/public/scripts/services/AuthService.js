@@ -1,10 +1,7 @@
 angular.module("pisosBabel").service("AuthService", ["$window", "APIClient", function($window, APIClient){
 	this.loginUser = function(user){
 
-
-		$window.localStorage['user'] = user.name;
-
-		/*APIClient.comprobarUsuario(user).then(
+		APIClient.comprobarUsuario(user).then(
 			function(resolve){
 				console.log(resolve);
 				if(resolve.result==false){
@@ -19,7 +16,7 @@ angular.module("pisosBabel").service("AuthService", ["$window", "APIClient", fun
 			function(error){
 				console.log("Ha habido un error en la base de datos");
 			}
-		);*/
+		);
 
 	}
 	this.getUser = function(){
