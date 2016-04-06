@@ -1,6 +1,7 @@
-angular.module("pisosBabel").controller("loginController", ["$scope", "AuthService",function($scope, AuthService){
+angular.module("pisosBabel").controller("loginController", ["$scope", "AuthService", "logService", function($scope, AuthService, logService){
 
 	$scope.model = {};
+
 
 	$scope.conectarse = function(){
 		// llamará al servicio para autenticar al usuario
@@ -8,6 +9,7 @@ angular.module("pisosBabel").controller("loginController", ["$scope", "AuthServi
 		AuthService.loginUser($scope.model);
 		$scope.uiState = 'success';
 	}
+
 
 
 }]);

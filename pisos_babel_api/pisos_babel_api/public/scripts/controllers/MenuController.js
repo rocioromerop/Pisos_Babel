@@ -1,5 +1,5 @@
-angular.module("pisosBabel").controller("MenuController", ["$scope", "$location", "$rootScope", "paths", 
-    function($scope, $location, $rootScope, paths, AuthService) {
+angular.module("pisosBabel").controller("MenuController", ["$scope", "$location", "$rootScope", "paths","AuthService", "logService",
+    function($scope, $location, $rootScope, paths, AuthService, logService) {
 
         //Scope init
         $scope.model = {
@@ -19,13 +19,23 @@ angular.module("pisosBabel").controller("MenuController", ["$scope", "$location"
             }
         };
 
-        //Scope Watchers
+        $scope.desconectarse = function(){
+            AuthService.logoutUser();
+            $location.url(paths.home);
+        }
 
+        //Scope Watchers
 
         $scope.$on("$locationChangeSuccess", function(evt, currentRoute) { //.$on capturar evento 
             $scope.model.selectedItem = $location.path();
         });
 
-        
+        logService.subscribeLogin($scope, function somethingChanged() {
+            $scope.userState = "logged";
+        });
+
+        logService.subscribeLogout($scope, function somethingChanged(){
+            $scope.userState = 'no-logged';
+        })
     }
 ]);

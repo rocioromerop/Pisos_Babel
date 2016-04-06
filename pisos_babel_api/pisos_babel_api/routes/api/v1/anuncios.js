@@ -25,7 +25,6 @@ router.get('/', function(req, res) {
 	let start = 0;
 	let limit = 0;
 
-
 	// PARA LA PAGINACIÓN
 	if(req.query.start != undefined){
 		start = parseInt(req.query.start);
@@ -36,6 +35,17 @@ router.get('/', function(req, res) {
 	}
 
 	// PARA LOS FILTROS
+
+	console.log(req.query.id);
+	if(req.query.id != undefined){
+		filters._id = req.query.id;
+		console.log("FILTERS: ", filters);
+	}
+
+	if(req.query.usuarioSubida !=undefined){
+		filters.usuarioSubida = req.query.usuarioSubida;
+	}
+
 	if(req.query.compra != undefined && (req.query.compra === 'false' || req.query.compra === 'true')){
 		filters.compra = req.query.compra;
 	}
@@ -76,6 +86,7 @@ router.get('/', function(req, res) {
 		filters.metros=met;
 
 	}
+
 	if(req.query.numeroHabitaciones != undefined){
 		var habit = req.query.numeroHabitaciones.split("-");
 

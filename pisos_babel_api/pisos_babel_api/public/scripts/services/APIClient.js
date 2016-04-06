@@ -27,6 +27,17 @@ angular.module("pisosBabel").service("APIClient", ["$http", "$q", "$filter", "ap
             return this.apiRequest(url);
         };
 
+        this.getMyAnuncios = function(usuarioAutenticado){
+            var url = apiPaths.pisos + '/?usuarioSubida=' +  usuarioAutenticado;
+            console.log(url);
+            return this.apiRequest(url);
+        }
+
+        this.getAnuncio = function (idAnuncio){  
+            var url = URL.resolve(apiPaths.pisos, idAnuncio);
+            return this.apiRequest(apiPaths.pisos+'/?id=' + idAnuncio); 
+        }
+
         this.createAnuncio = function(anuncio) {
             var deferred = $q.defer();
             $http.post(apiPaths.pisos, anuncio).then(
@@ -60,7 +71,6 @@ angular.module("pisosBabel").service("APIClient", ["$http", "$q", "$filter", "ap
             $http.post(apiPaths.usuarios, user).then(
                 function(response) {
                     deferred.resolve(response.data);
-                    console.log("1")
                 },
                 function(response) {
                     deferred.reject(response.data);

@@ -7,26 +7,27 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand">AnunciosBabel</a>
+            <a class="navbar-brand" href="#{{::paths.home}}">AnunciosBabel</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li ng-class="getClassForItem(paths.myAnuncios)">
+                <li ng-class="getClassForItem(paths.myAnuncios)" ng-show="userState=='logged'">
                     <a href="#{{::paths.myAnuncios}}">Mis anuncios</a>
                 </li>
-                <li ng-class="getClassForItem(paths.myFavourites)">
+                <li ng-class="getClassForItem(paths.myFavourites)" ng-show="userState=='logged'">
                     <a href="#{{::paths.myFavourites}}">Mis favoritos</a>
                 </li>
-                <li ng-class="getClassForItem(paths.newAnuncio)">
+                <li ng-class="getClassForItem(paths.newAnuncio)" ng-show="userState=='logged'">
                     <a href="#{{::paths.newAnuncio}}">Añadir anuncio</a>
                 </li>
-                <li ng-class="getClassForItem(paths.register)">
+                <li ng-class="getClassForItem(paths.register)" ng-show="userState=='no-logged'">
                     <a href="#{{::paths.register}}">Registrarse</a>
                 </li>
-                <li ng-class="getClassForItem(paths.login)">
+                <li ng-class="getClassForItem(paths.login)" ng-show="userState=='no-logged'">
                     <a href="#{{::paths.login}}">Autenticarse</a>
                 </li>
+                <button type="button" ng-show="userState=='logged'" class="btn btn-primary pull-right" ng-click="desconectarse()">Desconectarse</button>
             </ul>
             
         </div>

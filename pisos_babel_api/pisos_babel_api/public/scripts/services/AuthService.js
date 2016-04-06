@@ -1,28 +1,33 @@
-angular.module("pisosBabel").service("AuthService", ["$window", "APIClient", function($window, APIClient){
+angular.module("pisosBabel").service("AuthService", ["$window", "APIClient", "$rootScope", "logService", function($window, APIClient, $rootScope, logService){
 	this.loginUser = function(user){
-
 		APIClient.comprobarUsuario(user).then(
 			function(resolve){
-				console.log(resolve);
 				if(resolve.result==false){
-					console.log("NO AUTENTICADO CORRECTAMENTE");
+					logService.notifyLogout();
 				}
 				else{
 					//es que el usuario coincide
-					$window.localStorage['user'] = user;
-					console.log("autenticado correctamente");
+					console.log("LO QUE ME DEVUELVE LA BASE DE DATOS:", resolve);
+					$window.localStorage['user'] = resolve.rows.name;
+					$window.localStorage['fav'] = resolve.rows.myFav;
+					console.log($window.localStorage['fav']);
+					logService.notifyLogin();
 				}
 			},
 			function(error){
-				console.log("Ha habido un error en la base de datos");
+				logService.notifyLogout();
 			}
 		);
-
 	}
 	this.getUser = function(){
 		return $window.localStorage['user'];
 	}
 	this.logoutUser = function(){
 		$window.localStorage.removeItem('user');
+		logService.notifyLogout();
 	}
+	this.getFav = function(){
+		return $window.localStorage['fav'];
+	}
+	
 }])

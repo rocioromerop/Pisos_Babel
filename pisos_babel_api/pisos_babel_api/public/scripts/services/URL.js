@@ -1,5 +1,4 @@
 angular.module("URL", []).service("URL", ["$log", function($log) {
-	
 	this.resolve = function(url, params){
 		var finalURL = [];
 		var urlParts = url.split("/");

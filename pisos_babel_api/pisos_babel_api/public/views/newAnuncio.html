@@ -1,6 +1,7 @@
 <div ng-controller="newAnuncioController">
     <h1>Añadir Anuncio</h1>
     <div ng-show="uiState=='error'">Ha ocurrido un error!</div>
+    <div ng-show="uiState=='success'" class="alert alert-success" role="alert">Anuncio creado correctamente!</div>
     <form name="anuncioForm" novalidate class="form-horizontal" ng-submit="saveAnuncio()" ng-show="uiState=='ideal'">
         <div class="form-group" ng-class="{ 'has-success': anuncioForm.calle.$valid, 'has-error': anuncioForm.calle.$invalid && anuncioForm.calle.$dirty}">
             <label for="calle" class="col-sm-2 control-label">Calle</label>

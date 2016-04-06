@@ -8,10 +8,16 @@ var crypto = require("crypto");
 require('../../../models/userModel');
 var User = mongoose.model('User'); // pido el modelo
 
-//var auth = require("../../../lib/auth");
-
 router.get('/', function(req, res) {
+
     var sort = req.query.sort || 'name';
+
+    var filters = {};
+
+    if(req.query.name != undefined){
+        filters.name = req.query.name;
+    }
+
     // como quiero obtener todos los usuarios, no introduzco filtro: {}
     User.list({}, sort, function(err, rows) {
         if (err) {
@@ -35,7 +41,6 @@ router.post('/', function(req, res) {
     filters.name = req.body.name;
     //comprobar si existe ese nombre en la base de datos primero!
 
-    console.log("req.bodyy: ", req.body);
     User.list(filters, 'name', function(err, rows) {
         if (err) {
             res.json({ result: false, err: err });
@@ -48,7 +53,7 @@ router.post('/', function(req, res) {
                     sha256.update(req.body.pass, "utf8"); //utf8 here
                     let passConHash = sha256.digest("base64");
                     if(passConHash === rows[0].pass){
-                        return res.json({result: true, rows: "El usuario y la contraseña coinciden en la base de datos, usuario autenticado correctamente"})
+                        return res.json({result: true, rows: rows[0]})
                     }
                     return res.json({result: false, err: "La contraseña o el nombre de usuario no coinciden"})
                 }
@@ -84,8 +89,6 @@ router.post('/', function(req, res) {
         return;
     });
 });
-
-
 
 // para modificar el usuario (en una primera versión, sólo podré modificar los valores de mis anuncios y mis favoritos): me tienen que pasar el usuario (id del usuario) y los nuevos valores a modificar
 

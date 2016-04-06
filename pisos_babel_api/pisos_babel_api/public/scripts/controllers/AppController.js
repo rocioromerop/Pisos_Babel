@@ -1,5 +1,5 @@
-angular.module("pisosBabel").controller("AppController", ["$scope", "$location", "paths",
-    function($scope, $location, paths) {
+angular.module("pisosBabel").controller("AppController", ["$scope", "$location", "paths", "AuthService",
+    function($scope, $location, paths, AuthService) {
         var controller = this;
         //Controller properties
         controller.titles = {};
@@ -15,5 +15,8 @@ angular.module("pisosBabel").controller("AppController", ["$scope", "$location",
         };
 
         //Scope event listeners
+
+        $scope.userAuth = "";
+        AuthService.logoutUser();
     }
 ]);

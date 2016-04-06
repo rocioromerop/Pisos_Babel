@@ -1,0 +1,29 @@
+<div ng-controller="myAnunciosController">
+    <div ng-show='uiState=="loading"' class="alert alert-success" role="alert">Cargando...</div>
+    <div ng-show='uiState=="error"' class="alert alert-danger" role="alert">Ups! Ha habido un error</div>
+    <div ng-show='uiState=="blank"' class="alert alert-success" role="alert">No tienes anuncios añadidos :( ¡Añade el primero!</div>
+    <div class="container" ng-show="uiState=='ideal'">
+        <div class="row" ng-repeat="data in model">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="thumbnail">
+                    <div class="row">
+                        <div class="caption">
+                            <div class="col-sm-4">
+                                <img src="{{data.fotos[0]}}" class="img-responsive">
+                            </div>
+                            <div class="col-sm-8">
+                                <h3 class="title">{{::data.calle}}, {{::data.codigoPostal}}, {{::data.ciudad}}</h3>
+                                <span ng-if="data.compra">Precio: {{::data.precio}} euros</span>
+                                <span ng-if="data.compra==false">Precio: {{::data.precio}} euros al mes</span>
+                                <p>{{::data.descripcion}}</p>
+                            </div>
+                            <p class="text-right">
+                                <button class="btn btn-success" ng-click="moreInfo(data)">Más información</button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
