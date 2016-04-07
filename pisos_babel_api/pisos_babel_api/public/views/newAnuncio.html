@@ -31,16 +31,16 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="compra" class="col-sm-2 control-label">Venta o alquiler</label>
+            <label for="compra" class="col-sm-2 control-label">Venta o Alquiler</label>
             <div class="col-sm-10">
-                <div class="radio" ng-model="model.compra" class="form-control">
+                <div class="radio" class="form-control">
                     <label>
-                        <input type="radio" name="opciones1" id="opciones_1" value="opcion_1" ng-checked> El anuncio es para vender
+                        <input type="radio" ng-model="model.compra" value="opcion_1" ng-checked> El anuncio es para vender
                     </label>
                 </div>
-                <div class="radio" ng-model="model.compra" class="form-control">
+                <div class="radio" class="form-control">
                     <label>
-                        <input type="radio" name="opciones1" id="opciones_2" value="opcion_2"> El anuncio es para alquilar
+                        <input type="radio" ng-model="model.compra" value="opcion_2"> El anuncio es para alquilar
                     </label>
                 </div>
             </div>
@@ -75,14 +75,14 @@
         <div class="form-group">
             <label for="amueblado" class="col-sm-2 control-label">Amueblado</label>
             <div class="col-sm-10">
-                <div class="radio" ng-model="model.amueblado" class="form-control">
+                <div class="radio" class="form-control">
                     <label>
-                        <input type="radio" name="opciones2" id="opciones_1" value="opcion_1" ng-checked> Amueblado
+                        <input type="radio" ng-model="model.amueblado" value="opcion_1" ng-checked> Amueblado
                     </label>
                 </div>
-                <div class="radio" ng-model="model.amueblado" class="form-control">
+                <div class="radio" class="form-control">
                     <label>
-                        <input type="radio" name="opciones2" id="opciones_2" value="opcion_2"> No amueblado
+                        <input type="radio" ng-model="model.amueblado" value="opcion_2"> No amueblado
                     </label>
                 </div>
             </div>
@@ -111,6 +111,5 @@
         <div>
             <button class="btn btn-primary pull-right" type="submit" ng-disabled="anuncioForm.$invalid">Crear</button>
         </div>
-        
     </form>
 </div>

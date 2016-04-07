@@ -12,6 +12,9 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
+                <li ng-class="getClassForItem(paths.principal)">
+                    <a href="#{{::paths.home}}">Buscar anuncios</a>
+                </li>
                 <li ng-class="getClassForItem(paths.myAnuncios)" ng-show="userState=='logged'">
                     <a href="#{{::paths.myAnuncios}}">Mis anuncios</a>
                 </li>
@@ -29,7 +32,6 @@
                 </li>
                 <button type="button" ng-show="userState=='logged'" class="btn btn-primary pull-right" ng-click="desconectarse()">Desconectarse</button>
             </ul>
-            
         </div>
         <!-- /.navbar-collapse -->
     </div>

@@ -14,18 +14,24 @@ router.get('/', function(req, res) {
 
     var filters = {};
 
+    console.log("req.query.name", req.query.name);
+
     if(req.query.name != undefined){
         filters.name = req.query.name;
     }
-
+    console.log("filters", filters);
     // como quiero obtener todos los usuarios, no introduzco filtro: {}
-    User.list({}, sort, function(err, rows) {
+    User.list(filters, sort, function(err, rows) {
         if (err) {
             return res.json({ result: false, err: err });
         }
-        //Cuando estén disponibles, los mando en JSON
-        res.json({ result: true, rows: rows });
-        return;
+        if(rows.length != 0){
+            return res.json({ result: true, rows: rows });
+        }
+        else{
+            return res.json({result: false, err: 'No existe este usuario'})
+        }
+
     });
 });
 
@@ -71,6 +77,8 @@ router.post('/', function(req, res) {
             sha256.update(pass, "utf8"); //utf8 here
             let passConHash = sha256.digest("base64");
             usuario.pass = passConHash;
+            usuario.email = req.body.email;
+            usuario.phone = req.body.phone;
             usuario.name = req.body.name;
             usuario.myAnn = [];
             usuario.myFav = [];

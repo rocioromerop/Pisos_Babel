@@ -1,0 +1,46 @@
+<div ng-controller="principalController">
+    <h1>Buscar anuncios:</h1>
+    <div ng-show="uiState=='loading'" class="alert alert-info" role="alert">Cargando...</div>
+    <form name="BuscarAnuncioForm" novalidate class="form-horizontal" ng-submit="buscar()">
+        <div class="form-group">
+            <label for="compra" class="col-sm-2 control-label">Venta o Alquiler</label>
+            <div class="col-sm-10">
+                <div class="radio" class="form-control">
+                    <label>
+                        <input type="radio" ng-model="model.compra" value="opcion_1" ng-checked> Para comprar
+                    </label>
+                </div>
+                <div class="radio" class="form-control">
+                    <label>
+                        <input type="radio" ng-model="model.compra" value="opcion_2"> Para alquilar
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="compra" class="col-sm-2 control-label">Amueblado o no</label>
+            <div class="col-sm-10">
+                <div class="radio" class="form-control">
+                    <label>
+                        <input type="radio" ng-model="model.compra" value="opcion_1" ng-checked> Amueblado
+                    </label>
+                </div>
+                <div class="radio" class="form-control">
+                    <label>
+                        <input type="radio" ng-model="model.compra" value="opcion_2"> Sin amueblar
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="precio" class="col-sm-2 control-label">Precio: </label>
+            <div class="col-sm-10">
+                <label>
+                    <input type="number" name="precio" ng-model="model.precio" class="form-control">Mayor que</label>
+                <label>
+                    <input type="number" name="precio2" ng-model="model.precio" class="form-control">Menor que</label>
+            </div>
+        </div>
+        <button class="btn btn-primary pull-right" type="submit" ng-disabled="movieForm.$invalid">Buscar</button>
+    </form>
+</div>

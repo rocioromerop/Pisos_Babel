@@ -2,7 +2,6 @@ angular.module('pisosBabel', ["ngRoute", "URL", "ngSanitize"]).config(
     ["$routeProvider", "paths", function($routeProvider, paths) {
         // Configuro las URLs de la aplicación
 
-
         $routeProvider
         .when(paths.login, {
             templateUrl: 'views/login.html'
@@ -29,7 +28,7 @@ angular.module('pisosBabel', ["ngRoute", "URL", "ngSanitize"]).config(
             templateUrl: 'views/anuncioDetail.html',
         })
         .when(paths.home, {
-            templateUrl: 'views/anunciosList.html',
+            templateUrl: 'views/principal.html',
         })
         .otherwise({
             templateUrl: 'views/404.html'

@@ -53,6 +53,11 @@ angular.module("pisosBabel").service("APIClient", ["$http", "$q", "$filter", "ap
             return deferred.promise;
         }
 
+        this.getUser = function (nameUser){
+            var url = apiPaths.usuarios + '/?name=' + nameUser;
+            return this.apiRequest(url);
+        }
+
         this.registerUser = function(user) {
             var deferred = $q.defer();
             $http.post(apiPaths.usuarios, user).then(

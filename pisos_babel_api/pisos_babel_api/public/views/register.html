@@ -8,8 +8,26 @@
             <label for="usuario" class="col-sm-2 control-label">Usuario</label>
             <div class="col-sm-10">
                 <input type="text" name="name" ng-model="model.name" class="form-control" required>
-                <div class="text-danger" ng-show="movieForm.name.$dirty && movieForm.name.$error.required">
+                <div class="text-danger" ng-show="registroForm.name.$dirty && registroForm.name.$error.required">
                     El usuario es obligatorio
+                </div>
+            </div>
+        </div>
+        <div class="form-group" ng-class="{ 'has-success': registroForm.email.$valid, 'has-error': registroForm.email.$invalid && registroForm.email.$dirty}">
+            <label for="email" class="col-sm-2 control-label">Email</label>
+            <div class="col-sm-10">
+                <input type="email" name="email" ng-model="model.email" class="form-control" required>
+                <div class="text-danger" ng-show="registroForm.email.$dirty && registroForm.email.$error.required">
+                    El email es obligatoria
+                </div>
+            </div>
+        </div>
+        <div class="form-group" ng-class="{ 'has-success': registroForm.phone.$valid, 'has-error': registroForm.phone.$invalid && registroForm.phone.$dirty}">
+            <label for="phone" class="col-sm-2 control-label">Teléfono</label>
+            <div class="col-sm-10">
+                <input type="number" name="phone" ng-model="model.phone" class="form-control" required>
+                <div class="text-danger" ng-show="registroForm.phone.$dirty && registroForm.phone.$error.required">
+                    La teléfono es obligatorio
                 </div>
             </div>
         </div>
