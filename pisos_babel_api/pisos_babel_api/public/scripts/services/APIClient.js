@@ -16,7 +16,6 @@ angular.module("pisosBabel").service("APIClient", ["$http", "$q", "$filter", "ap
                     deferred.reject(response.data);
                 }
             );
-
             // devolver la promesa
             return deferred.promise;
         }
@@ -33,6 +32,10 @@ angular.module("pisosBabel").service("APIClient", ["$http", "$q", "$filter", "ap
             return this.apiRequest(url);
         }
 
+        this.getAnunciosFiltrados = function(filtros){
+            var url = apiPaths.pisos + '/?' + filtros;
+            return this.apiRequest(url);
+        }
         this.getAnuncio = function (idAnuncio){  
             var url = URL.resolve(apiPaths.pisos, idAnuncio);
             return this.apiRequest(apiPaths.pisos+'/?id=' + idAnuncio); 
@@ -42,11 +45,9 @@ angular.module("pisosBabel").service("APIClient", ["$http", "$q", "$filter", "ap
             var deferred = $q.defer();
             $http.post(apiPaths.pisos, anuncio).then(
                 function(response) {
-                    console.log("1");
                     deferred.resolve(response.data);
                 },
                 function(response) {
-                    console.log("2");
                     deferred.reject(response.data);
                 }
             )
@@ -82,9 +83,12 @@ angular.module("pisosBabel").service("APIClient", ["$http", "$q", "$filter", "ap
                 }
                 )
                 return deferred.promise;
-            
         }
-
+        
+        this.addFav = function(idAnuncio, user){
+            var deferred = $q.defer();
+            var url = apiPaths.usuarios + '?'+user.
+           $http.put(apiPaths.usuarios)
+        }
     }]
-
 );

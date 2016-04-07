@@ -9,11 +9,11 @@
                         <div class="caption">
                             <div class="col-sm-8">
                                 <h3 class="title">{{::data.calle}}, {{::data.codigoPostal}}, {{::data.ciudad}}</h3>
-                                <span ng-if="data.compra">Precio: {{::data.precio}} euros</span>
-                                <span ng-if="data.compra==false">Precio: {{::data.precio}} euros al mes</span>
-                                <span>Número de habitaciones: {{::data.numeroHabitaciones}}</span>
-                                <span>Metros: {{::data.metros}}</span>
-                                <span>Amueblado: {{::data.amueblado}}</span>
+                                <span ng-if="data.compra">Precio: {{::data.precio}} euros,</span>
+                                <span ng-if="data.compra==false">Precio: {{::data.precio}} euros al mes,</span>
+                                <span>Número de habitaciones: {{::data.numeroHabitaciones}},</span>
+                                <span>Metros: {{::data.metros}},</span>
+                                <span>Amueblado: {{::data.amueblado}},</span>
                                 <p></p>
                                 <p>Descripción: {{::data.descripcion}}</p>
                                 <p>Fotos:</p>
@@ -22,6 +22,7 @@
                                     <div class='col-md-8'>
                                         <div ng-repeat="fts in data.fotos">
                                             <img src="{{::fts}}" class="img-responsive">
+                                            <p></p>
                                         </div>
                                     </div>
                                 </div>
@@ -35,8 +36,13 @@
                                         <p>Email: {{::contact.email}}</p>
                                     </div>
                                 </div>
+
+                                <button ng-show='autentic==true'class='btn btn-info' ng-click='addFav()'>Añadir a favoritos</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
