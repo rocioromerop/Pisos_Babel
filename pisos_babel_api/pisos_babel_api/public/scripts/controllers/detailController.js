@@ -13,7 +13,7 @@ angular.module('pisosBabel').controller('detailController', ['paths', '$scope', 
     if (usuarioAutenticado != undefined) {
         $scope.autentic = 'true';
     }
-    if(favsUsuario != undefined){
+    if (favsUsuario != undefined) {
         var favSeparados = favsUsuario.split(",");
     }
 
@@ -32,20 +32,16 @@ angular.module('pisosBabel').controller('detailController', ['paths', '$scope', 
                 // promesa resuelta
                 function(data2) {
                     $scope.contact = data2.rows[0];
-                    if(usuarioAutenticado == data2.rows[0].name){
+                    if (usuarioAutenticado == data2.rows[0].name) {
                         $scope.autentic = 'false';
                     }
                     if (favsUsuario != undefined) {
                         for (var i = 0; i < favSeparados.length; i++) {
-                            console.log("data.rows[0]._id", data.rows[0]._id);
-                            console.log("favSeparados[i]", favSeparados[i]);
                             if (favSeparados[i] == data.rows[0]._id) {
                                 $scope.bott = 'yaFav';
                             }
                         }
                     }
-
-
                     $scope.uiState = 'ideal';
                 },
                 //promesa rechazada
@@ -62,20 +58,33 @@ angular.module('pisosBabel').controller('detailController', ['paths', '$scope', 
     $scope.addFav = function() {
         var myFav = '{"myFav":"' + $scope.model[0]._id + '" }';
         var favJson = JSON.parse(myFav);
-
         $scope.bott = 'loading';
         APIClient.addFav(idUsuario, favJson).then(
             function(data) {
-                AuthService.addFav(favJson);
+                console.log('favJson', favJson);
+                AuthService.addFav($scope.model[0]._id);
                 $scope.bott = 'yaFav';
             },
             function(data) {
                 $scope.uiState = 'error';
             }
         );
-
     }
 
+    $scope.removeFav = function() {
+        var myFav = '{"myFav":"' + $scope.model[0]._id + '", "opt":"defined" }';
+        var favJson = JSON.parse(myFav);
+        $scope.bott = 'loading';
+        APIClient.removeFav(idUsuario, favJson).then(
+            function(data) {
+                AuthService.removeFav($scope.model[0]._id);
+                $scope.bott = '';
+            },
+            function(data) {
+                $scope.uiState = 'error';
+            }
+    );
+}
 
-    /////////////////////FALTA COMPROBAR SI ESTE USUARIO TIENE YA ESTE ANUNCIO COMO FAVORITO, PARA CONTROLAR QUE SI AL PULSAR LO QUE SE HACE ES AGREGARLO O QUITARLO.
+
 }])

@@ -1,4 +1,4 @@
-angular.module('pisosBabel').controller('myFavController', ['$scope', "APIClient", 'AuthService', function($scope, APIClient, AuthService) {
+angular.module('pisosBabel').controller('myFavController', ['URL','$location', 'paths', '$scope', "APIClient", 'AuthService', function(URL, $location, paths, $scope, APIClient, AuthService) {
 
     $scope.model = [];
 
@@ -29,6 +29,10 @@ angular.module('pisosBabel').controller('myFavController', ['$scope', "APIClient
                 )
             }
         }
+    }
+    $scope.moreInfo = function(anuncio) {
+        var url = URL.resolve(paths.anuncioDetail, { id: anuncio._id });
+        $location.url(url);
     }
 
 }])

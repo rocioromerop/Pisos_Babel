@@ -21,7 +21,7 @@
                                     <div class='col-md-2'></div>
                                     <div class='col-md-8'>
                                         <div ng-repeat="fts in data.fotos">
-                                            <img src="{{::fts}}" class="img-responsive">
+                                            <img ng-src="{{::fts}}" class="img-responsive">
                                             <p></p>
                                         </div>
                                     </div>
@@ -37,8 +37,8 @@
                                     </div>
                                 </div>
                                 <button ng-show='autentic=="true" && bott!="yaFav"' class='btn btn-primary' ng-click='addFav()'><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Añadir a favoritos</button>
-                                <button ng-show='bott=="loading"' class='btn btn-info'>Loading.. </button>
-                                <button ng-show='bott=="yaFav"' class='btn btn-info'>Eliminar favorito</button>
+                                <button ng-show='bott=="loading"' class='btn btn-primary' ng-disabled="checked">Loading.. </button>
+                                <button ng-show='bott=="yaFav"' class='btn btn-primary' ng-click="removeFav()">Eliminar favorito</button>
                             </div>
                         </div>
                     </div>

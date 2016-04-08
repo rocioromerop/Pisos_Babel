@@ -27,7 +27,6 @@ angular.module('pisosBabel').controller('principalController', ['$location', '$s
                 $scope.uiState = 'error';
             }
         );
-
         //llamar a searchService que se encargará de realizar la llamada a APIClient, que este pasará los filtros a la api para obtener los anuncios específicos con ese filtro
     }
 	$scope.moreInfo = function(anuncio){

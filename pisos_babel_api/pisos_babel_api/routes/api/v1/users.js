@@ -16,7 +16,7 @@ router.get('/', function(req, res) {
 
     console.log("req.query.name", req.query.name);
 
-    if(req.query.name != undefined){
+    if (req.query.name != undefined) {
         filters.name = req.query.name;
     }
     console.log("filters", filters);
@@ -25,11 +25,10 @@ router.get('/', function(req, res) {
         if (err) {
             return res.json({ result: false, err: err });
         }
-        if(rows.length != 0){
+        if (rows.length != 0) {
             return res.json({ result: true, rows: rows });
-        }
-        else{
-            return res.json({result: false, err: 'No existe este usuario'})
+        } else {
+            return res.json({ result: false, err: 'No existe este usuario' })
         }
 
     });
@@ -53,25 +52,24 @@ router.post('/', function(req, res) {
             return;
         }
         if (rows.length !== 0) {
-            if(authentic === 'true'){
-                if(rows[0].name === req.body.name){ //coincide el nombre, ahora comprobar la contraseña, que ya me viene hasheada
+            if (authentic === 'true') {
+                if (rows[0].name === req.body.name) { //coincide el nombre, ahora comprobar la contraseña, que ya me viene hasheada
                     let sha256 = crypto.createHash("sha256");
                     sha256.update(req.body.pass, "utf8"); //utf8 here
                     let passConHash = sha256.digest("base64");
-                    if(passConHash === rows[0].pass){
-                        return res.json({result: true, rows: rows[0]})
+                    if (passConHash === rows[0].pass) {
+                        return res.json({ result: true, rows: rows[0] })
                     }
-                    return res.json({result: false, err: "La contraseña o el nombre de usuario no coinciden"})
+                    return res.json({ result: false, err: "La contraseña o el nombre de usuario no coinciden" })
                 }
-                 return res.json({result: false, err: "La contraseña o el nombre de usuario no coinciden (2)"})
-            }
-            else{
+                return res.json({ result: false, err: "La contraseña o el nombre de usuario no coinciden (2)" })
+            } else {
                 res.json({ result: false, err: "El usuario ya está registrado" });
                 return;
             }
         } else {
-            if(authentic === 'true'){
-                return res.json({result: false, err: "El usuario no se encuentra en la base de datos"})
+            if (authentic === 'true') {
+                return res.json({ result: false, err: "El usuario no se encuentra en la base de datos" })
             }
             let sha256 = crypto.createHash("sha256");
             sha256.update(pass, "utf8"); //utf8 here
@@ -102,6 +100,13 @@ router.post('/', function(req, res) {
 
 router.put('/:id', function(req, res) {
     var options = {};
+
+    var opt = false;
+
+    if (req.body.opt != undefined) {
+        opt = true;
+    }
+
     console.log('req.body', req.body);
     User.findOne({ _id: req.params.id }, function(err, rows) {
         if (err) {
@@ -111,12 +116,23 @@ router.put('/:id', function(req, res) {
             return res.json({ result: false, err: "El usuario no existe (el id pasado no corresponde con ningun usuario" })
         } else { // sí que existe este usuario
             console.log('rows', rows);
-            User.update({ _id: req.params.id }, { $push: req.body }, options, function(err, data) {
-                if (err) {
-                    return res.json({ result: false, err: err });
-                }
-                return res.json({ result: true, row: data });
-            });
+            if (opt == false) {
+                User.update({ _id: req.params.id }, { $push: req.body }, options, function(err, data) {
+                    if (err) {
+                        return res.json({ result: false, err: err });
+                    }
+                    return res.json({ result: true, row: data });
+                });
+            }
+            if (opt == true) {
+                User.update({ _id: req.params.id }, { $pull: req.body }, options, function(err, data) {
+                    if (err) {
+                        return res.json({ result: false, err: err });
+                    }
+                    return res.json({ result: true, row: data });
+                })
+            }
+
         }
     });
 });
