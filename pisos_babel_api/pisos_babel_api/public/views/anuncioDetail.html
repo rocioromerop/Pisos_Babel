@@ -36,8 +36,9 @@
                                         <p>Email: {{::contact.email}}</p>
                                     </div>
                                 </div>
-
-                                <button ng-show='autentic==true'class='btn btn-info' ng-click='addFav()'>Añadir a favoritos</button>
+                                <button ng-show='autentic=="true" && bott!="yaFav"' class='btn btn-primary' ng-click='addFav()'><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Añadir a favoritos</button>
+                                <button ng-show='bott=="loading"' class='btn btn-info'>Loading.. </button>
+                                <button ng-show='bott=="yaFav"' class='btn btn-info'>Eliminar favorito</button>
                             </div>
                         </div>
                     </div>

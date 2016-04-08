@@ -1,6 +1,7 @@
 <div ng-controller="myFavController">
     <div ng-show='uiState=="loading"'>Cargando...</div>
     <div ng-show='uiState=="error"'>Ups! Ha habido un error</div>
+    <div ng-show='uiState=="noAuth"' class="alert alert-info" role="alert">No estás autenticado, autentícate!</div>
     <div ng-show='uiState=="blank"' class="alert alert-info" role="alert">No tienes anuncios favoritos :( ¡Añade el primero!</div>
     <div class="container" ng-show="uiState=='ideal'">
         <div class="row" ng-repeat="data in model">
@@ -9,7 +10,7 @@
                     <div class="row">
                         <div class="caption">
                             <div class="col-sm-4">
-                                <img src="{{data.fotos[0]}}" class="img-responsive">
+                                <img ng-src="{{data.fotos[0]}}" class="img-responsive">
                             </div>
                             <div class="col-sm-8">
                                 <h3 class="title">{{::data.calle}}, {{::data.codigoPostal}}, {{::data.ciudad}}</h3>

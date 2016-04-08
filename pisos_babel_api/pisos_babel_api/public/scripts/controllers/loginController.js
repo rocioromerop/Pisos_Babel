@@ -1,15 +1,19 @@
-angular.module("pisosBabel").controller("loginController", ["$scope", "AuthService", "logService", function($scope, AuthService, logService){
+angular.module("pisosBabel").controller("loginController", ["$scope", "AuthService", "logService", function($scope, AuthService, logService) {
 
-	$scope.model = {};
+    $scope.model = {};
 
+    $scope.conectarse = function() {
+        // llamará al servicio para autenticar al usuario
+        $scope.model.authentic = 'true';
+        AuthService.loginUser($scope.model);
+    }
 
-	$scope.conectarse = function(){
-		// llamará al servicio para autenticar al usuario
-		$scope.model.authentic = 'true';
-		AuthService.loginUser($scope.model);
-		$scope.uiState = 'success';
-	}
+    logService.subscribeLogin($scope, function somethingChanged() {
+        $scope.userState = "logged";
+    });
 
-
+    logService.subscribeLogout($scope, function somethingChanged() {
+        $scope.userState = 'no-logged';
+    })
 
 }]);

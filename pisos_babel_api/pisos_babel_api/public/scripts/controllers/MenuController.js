@@ -3,7 +3,7 @@ angular.module("pisosBabel").controller("MenuController", ["$scope", "$location"
 
         //Scope init
         $scope.model = {
-            selectedItem: paths.login
+            selectedItem: paths.home
         };
 
         $scope.userState = "no-logged";

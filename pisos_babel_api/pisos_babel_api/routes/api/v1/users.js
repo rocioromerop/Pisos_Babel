@@ -102,6 +102,7 @@ router.post('/', function(req, res) {
 
 router.put('/:id', function(req, res) {
     var options = {};
+    console.log('req.body', req.body);
     User.findOne({ _id: req.params.id }, function(err, rows) {
         if (err) {
             return res.json({ result: false, err: err }); // error en la base de datos
@@ -109,6 +110,7 @@ router.put('/:id', function(req, res) {
         if (rows == null) { //no existe este usuario
             return res.json({ result: false, err: "El usuario no existe (el id pasado no corresponde con ningun usuario" })
         } else { // sí que existe este usuario
+            console.log('rows', rows);
             User.update({ _id: req.params.id }, { $push: req.body }, options, function(err, data) {
                 if (err) {
                     return res.json({ result: false, err: err });

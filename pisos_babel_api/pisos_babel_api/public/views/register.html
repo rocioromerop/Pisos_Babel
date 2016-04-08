@@ -34,7 +34,7 @@
         <div class="form-group" ng-class="{ 'has-success': registroForm.pass.$valid, 'has-error': registroForm.pass.$invalid && registroForm.pass.$dirty}">
             <label for="pass" class="col-sm-2 control-label">Contraseña</label>
             <div class="col-sm-10">
-                <input type="text" name="pass" ng-model="model.pass" class="form-control" required>
+                <input type="password" name="pass" ng-model="model.pass" class="form-control" required>
                 <div class="text-danger" ng-show="registroForm.pass.$dirty && registroForm.pass.$error.required">
                     La contraseña es obligatoria
                 </div>

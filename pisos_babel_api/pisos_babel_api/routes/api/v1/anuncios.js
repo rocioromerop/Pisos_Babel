@@ -39,7 +39,6 @@ router.get('/', function(req, res) {
 	console.log(req.query.id);
 	if(req.query.id != undefined){
 		filters._id = req.query.id;
-		console.log("FILTERS: ", filters);
 	}
 
 	if(req.query.usuarioSubida !=undefined){

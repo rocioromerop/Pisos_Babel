@@ -85,10 +85,19 @@ angular.module("pisosBabel").service("APIClient", ["$http", "$q", "$filter", "ap
                 return deferred.promise;
         }
         
-        this.addFav = function(idAnuncio, user){
+        this.addFav = function(idUser, myFav){
             var deferred = $q.defer();
-            var url = apiPaths.usuarios + '?'+user.
-           $http.put(apiPaths.usuarios)
+            var url = apiPaths.usuarios + '/'+ idUser;
+            console.log("myFav", myFav);
+           $http.put(url, myFav).then(
+                function(response){
+                    deferred.resolve(response.data);
+                },
+                function(response){
+                    deferred.reject(response.data);
+                }
+            )
+           return deferred.promise;
         }
     }]
 );

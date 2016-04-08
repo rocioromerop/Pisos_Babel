@@ -1,4 +1,4 @@
-angular.module('pisosBabel').controller('principalController', ['$location', '$scope','URL', 'paths', 'searchService', function($location, $scope, URL, paths, searchService) {
+angular.module('pisosBabel').controller('principalController', ['$location', '$scope','URL', 'paths', 'searchService', function($location,$scope, URL, paths, searchService) {
 
     $scope.model = [];
 
@@ -20,21 +20,18 @@ angular.module('pisosBabel').controller('principalController', ['$location', '$s
 
         searchService.lookFor($scope.model).then(
             function(data) {
-                $scope.resultado = data.rows;
                 $scope.uiState = 'encontrado';
-                console.log($scope.resultado);
+                $scope.resultado = data.rows;
             },
             function(data) {
-                console.log('error');
                 $scope.uiState = 'error';
             }
         );
 
-        console.log('$scope.resultado', $scope.resultado);
         //llamar a searchService que se encargará de realizar la llamada a APIClient, que este pasará los filtros a la api para obtener los anuncios específicos con ese filtro
     }
 	$scope.moreInfo = function(anuncio){
-		var url = URL.resolve(paths.anuncioDetail, { id: anuncio._id });
-		$location.url(url);
+	   var url = URL.resolve(paths.anuncioDetail, { id: anuncio._id });
+	   $location.url(url);
 	}
 }])

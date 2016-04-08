@@ -1,11 +1,16 @@
-angular.module('pisosBabel').controller('myAnunciosController', ['$scope', "APIClient", 'AuthService', function($scope, APIClient, AuthService){
-	
-	$scope.model = {};
+angular.module('pisosBabel').controller('myAnunciosController', ['$location', 'paths', 'URL', '$scope', "APIClient", 'AuthService', function($location, paths, URL, $scope, APIClient, AuthService) {
 
-	$scope.uiState = 'loading';
+    $scope.model = {};
 
-	APIClient.getMyAnuncios(AuthService.getUser()).then(
-		// promesa resuelta
+    $scope.uiState = 'loading';
+
+    var usuarioAutenticado = AuthService.getUser();
+
+    if (usuarioAutenticado == undefined) {
+        $scope.uiState = 'noAuth';
+    } else {
+        APIClient.getMyAnuncios(AuthService.getUser()).then(
+            // promesa resuelta
             function(data) {
                 $scope.model = data.rows;
                 if ($scope.model.length == 0) {
@@ -18,6 +23,10 @@ angular.module('pisosBabel').controller('myAnunciosController', ['$scope', "APIC
             function(data) {
                 $scope.uiState = "error";
             }
-		);
-
+        );
+    }
+    $scope.moreInfo = function(anuncio) {
+        var url = URL.resolve(paths.anuncioDetail, { id: anuncio._id });
+        $location.url(url);
+    }
 }])

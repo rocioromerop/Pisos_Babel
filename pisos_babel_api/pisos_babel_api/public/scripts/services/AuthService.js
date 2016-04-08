@@ -7,10 +7,10 @@ angular.module("pisosBabel").service("AuthService", ["$window", "APIClient", "$r
 				}
 				else{
 					//es que el usuario coincide
-					console.log("LO QUE ME DEVUELVE LA BASE DE DATOS:", resolve);
+					console.log('paso por aqui');
 					$window.localStorage['user'] = resolve.rows.name;
 					$window.localStorage['fav'] = resolve.rows.myFav;
-					console.log($window.localStorage['fav']);
+					$window.localStorage['id'] = resolve.rows._id;
 					logService.notifyLogin();
 				}
 			},
@@ -24,10 +24,20 @@ angular.module("pisosBabel").service("AuthService", ["$window", "APIClient", "$r
 	}
 	this.logoutUser = function(){
 		$window.localStorage.removeItem('user');
+		$window.localStorage.removeItem('id');
+		$window.localStorage.removeItem('fav');
 		logService.notifyLogout();
 	}
 	this.getFav = function(){
 		return $window.localStorage['fav'];
+	}
+	this.addFav = function(fav){
+		console.log('1', $window.localStorage['fav']);
+		$window.localStorage['fav'] = $window.localStorage['fav'] + ','+ fav;
+		console.log('2', $window.localStorage['fav']);
+	}
+	this.getId = function(){
+		return $window.localStorage['id'];
 	}
 	
 }])
