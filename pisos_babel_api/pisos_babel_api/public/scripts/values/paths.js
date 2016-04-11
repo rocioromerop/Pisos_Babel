@@ -2,7 +2,6 @@ angular.module("pisosBabel").constant("paths", {
     home: "/",
     register: "/register",
     login: "/login",
-    logout: "/logout",
     anuncios: "/anuncios",
     myAnuncios: "/anuncios/myAnuncios",
     myFavourites: "/anuncios/myFavourites",

@@ -7,11 +7,6 @@ angular.module('pisosBabel').controller('myFavController', ['URL', '$location', 
     if (usuarioAutenticado == undefined) {
         $scope.uiState = 'noAuth';
     } else {
-
-        if (AuthService.getFav() == undefined) {
-            console.log("UNDEFINED");
-        }
-
         var myFav = AuthService.getFav();
 
         // Tengo que obtener todos los anuncios con todos los IDs -> llamadas a la api con esos ids
@@ -40,6 +35,7 @@ angular.module('pisosBabel').controller('myFavController', ['URL', '$location', 
             }
         }
     }
+    
     $scope.moreInfo = function(anuncio) {
         var url = URL.resolve(paths.anuncioDetail, { id: anuncio._id });
         $location.url(url);

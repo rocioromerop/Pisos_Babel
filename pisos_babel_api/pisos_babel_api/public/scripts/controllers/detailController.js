@@ -8,16 +8,12 @@ angular.module('pisosBabel').controller('detailController', ['paths', '$scope', 
     var idUsuario = AuthService.getId();
     var favsUsuario = AuthService.getFav();
 
-    console.log('usuarioAutenticado: ', usuarioAutenticado);
-
     if (usuarioAutenticado != undefined) {
         $scope.autentic = 'true';
     }
     if (favsUsuario != undefined) {
         var favSeparados = favsUsuario.split(",");
     }
-
-    console.log('favsUsuario', favsUsuario);
     $scope.uiState = 'loading';
     // Buscar en la base de datos el id del anuncio específico que quiero ver
     APIClient.getAnuncio($routeParams.id).then(
@@ -61,7 +57,6 @@ angular.module('pisosBabel').controller('detailController', ['paths', '$scope', 
         $scope.bott = 'loading';
         APIClient.addFav(idUsuario, favJson).then(
             function(data) {
-                console.log('favJson', favJson);
                 AuthService.addFav($scope.model[0]._id);
                 $scope.bott = 'yaFav';
             },

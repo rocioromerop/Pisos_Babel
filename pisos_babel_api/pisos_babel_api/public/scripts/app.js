@@ -6,9 +6,6 @@ angular.module('pisosBabel', ["ngRoute", "URL", "ngSanitize"]).config(
         .when(paths.login, {
             templateUrl: 'views/login.html'
         })
-        .when(paths.logout, {
-            templateUrl: 'views/logout.html'
-        })
         .when(paths.register, {
             templateUrl: 'views/register.html'
         })

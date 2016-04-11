@@ -161,7 +161,7 @@ router.post('/', function(req, res) {
 
 	// Coger los elementos a añadir del anuncio
 
-	let currentDate = new Date();
+	let currentDate = new Date().toISOString();
 
 	anuncioAgregar.codigoPostal = req.body.codigoPostal;
 	anuncioAgregar.calle = req.body.calle;

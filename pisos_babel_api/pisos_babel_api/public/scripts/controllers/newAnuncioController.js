@@ -26,7 +26,7 @@ angular.module("pisosBabel").controller("newAnuncioController", ["$scope", "APIC
         APIClient.createAnuncio($scope.model).then(
             function(movie) {
             	$scope.uiState = 'success';
-                $location.path(paths.anuncios);
+                $location.path(paths.myAnuncios);
             },
             function(error) {
                 $scope.uiState = 'error';

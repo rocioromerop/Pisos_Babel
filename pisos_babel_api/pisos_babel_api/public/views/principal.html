@@ -1,98 +1,91 @@
 <div ng-controller="principalController">
     <h1>Buscar anuncios:</h1>
     <div ng-show="uiState=='loading'" class="alert alert-info" role="alert">Cargando...</div>
-    <form name="BuscarAnuncioForm" novalidate class="form-horizontal" ng-submit="buscar()">
-        <div class="form-group">
-            <label for="codigoPostal" class="col-sm-2 control-label">Código Postal:</label>
-            <div class="col-sm-10">
+    <div class='container'>
+        <form name="BuscarAnuncioForm" novalidate class="form-horizontal" ng-submit="buscar()" ng-show="uiState!='loading'">
+            <div class="form-group">
+                <label for="codigoPostal" class="col-sm-2 control-label">Código Postal:</label>
+                <div class="col-sm-10">
                     <label>
                         <input type="number" class="form-control" ng-model="model.codigoPostal">
                     </label>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="compra" class="col-sm-2 control-label">Venta o Alquiler:</label>
-            <div class="col-sm-10">
-                <div class="radio" class="form-control">
-                    <label>
-                        <input type="radio" ng-model="model.compra" value="opcion_1"> Para comprar
-                    </label>
-                </div>
-                <div class="radio" class="form-control">
-                    <label>
-                        <input type="radio" ng-model="model.compra" value="opcion_2"> Para alquilar
-                    </label>
                 </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="amueblado" class="col-sm-2 control-label">Amueblado o no:</label>
-            <div class="col-sm-10">
-                <div class="radio" class="form-control">
-                    <label>
-                        <input type="radio" ng-model="model.amueblado" value="opcion_1"> Amueblado
-                    </label>
-                </div>
-                <div class="radio" class="form-control">
-                    <label>
-                        <input type="radio" ng-model="model.amueblado" value="opcion_2"> Sin amueblar
-                    </label>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="precio" class="col-sm-2 control-label">Precio: </label>
-            <div class="col-sm-10">
-                <label>
-                    <input type="number" name="precio" ng-model="model.precio1" class="form-control">Mayor que</label>
-                <label>
-                    <input type="number" name="precio2" ng-model="model.precio2" class="form-control">Menor que</label>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="metros" class="col-sm-2 control-label">Metros: </label>
-            <div class="col-sm-10">
-                <label>
-                    <input type="number" name="metros" ng-model="model.metros1" class="form-control">Mayor que</label>
-                <label>
-                    <input type="number" name="metros2" ng-model="model.metros2" class="form-control">Menor que</label>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="numeroHabitaciones" class="col-sm-2 control-label">Número de habitaciones: </label>
-            <div class="col-sm-2">
-                <input type="number" ng-model="model.numeroHabitaciones" class='form-control'>
-            </div>
-        </div>
-        <button class="btn btn-primary pull-right" type="submit" ng-disabled="BuscarAnuncioForm.$invalid">Buscar</button>
-    </form>
-    <div ng-show="uiState=='encontrado'">
-        <div class="container">
-            <h1>Anuncios encontrados:</h1>
-            <div class="row" ng-repeat="data in resultado">
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="thumbnail">
-                        <div class="row">
-                            <div class="caption">
-                                <div class="col-sm-4">
-                                    <img ng-src="{{data.fotos[0]}}" class="img-responsive">
-                                </div>
-                                <div class="col-sm-8">
-                                    <h3 class="title">{{::data.calle}}, {{::data.codigoPostal}}, {{::data.ciudad}}</h3>
-                                    <span ng-if="data.compra">Precio: {{::data.precio}} euros</span>
-                                    <span ng-if="data.compra==false">Precio: {{::data.precio}} euros al mes</span>
-                                    <p>Número de habitaciones: {{::data.numeroHabitaciones}}</p>
-                                    <p>Metros: {{::data.metros}}</p>
-                                    <p>{{::data.descripcion}}</p>
-                                </div>
-                                <p class="text-right">
-                                    <button class="btn btn-success" ng-click="moreInfo(data)">Más información</button>
-                                </p>
-                            </div>
-                        </div>
+            <div class="form-group">
+                <label for="compra" class="col-sm-2 control-label">Venta o Alquiler:</label>
+                <div class="col-sm-10">
+                    <div class="radio" class="form-control">
+                        <label>
+                            <input type="radio" ng-model="model.compra" value="opcion_1"> Para comprar
+                        </label>
+                    </div>
+                    <div class="radio" class="form-control">
+                        <label>
+                            <input type="radio" ng-model="model.compra" value="opcion_2"> Para alquilar
+                        </label>
                     </div>
                 </div>
             </div>
+            <div class="form-group">
+                <label for="amueblado" class="col-sm-2 control-label">Amueblado o no:</label>
+                <div class="col-sm-10">
+                    <div class="radio" class="form-control">
+                        <label>
+                            <input type="radio" ng-model="model.amueblado" value="opcion_1"> Amueblado
+                        </label>
+                    </div>
+                    <div class="radio" class="form-control">
+                        <label>
+                            <input type="radio" ng-model="model.amueblado" value="opcion_2"> Sin amueblar
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="precio" class="col-sm-2 control-label">Precio: </label>
+                <div class="col-sm-10">
+                    <label>
+                        <input type="number" name="precio" ng-model="model.precio1" class="form-control">Mayor que</label>
+                    <label>
+                        <input type="number" name="precio2" ng-model="model.precio2" class="form-control">Menor que</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="metros" class="col-sm-2 control-label">Metros: </label>
+                <div class="col-sm-10">
+                    <label>
+                        <input type="number" name="metros" ng-model="model.metros1" class="form-control">Mayor que</label>
+                    <label>
+                        <input type="number" name="metros2" ng-model="model.metros2" class="form-control">Menor que</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="numeroHabitaciones" class="col-sm-2 control-label">Número de habitaciones: </label>
+                <div class="col-sm-2">
+                    <label>
+                        <input type="number" ng-model="model.numeroHabitaciones" class='form-control'>
+                    </label>
+                </div>
+            </div>
+            <button class="btn btn-primary pull-right" type="submit" ng-disabled="BuscarAnuncioForm.$invalid">Buscar</button>
+        </form>
+    </div>
+    <div>
+        <div ng-show="uiState=='blank'" class="alert alert-info" role="alert">Actualmente no hay anuncios con esas características :(</div>
+    </div>
+    <div>
+        <div ng-show="more=='false'" class="alert alert-info" role="alert">No hay más anuncios con esas características :(</div>
+        <button class="btn btn-primary" ng-show="less=='true'" ng-click='tenless()'>3 anuncios menos</button>
+    </div>
+    <div ng-show="uiState=='encontrado' && more=='true'">
+        <div class="container">
+            <h1 ng-show="">Anuncios encontrados:</h1>
+            <anuncio-item model="resultado" more-info="moreInfo(stuff)"></anuncio-item>
+            <div>
+                <button class="btn btn-primary" ng-show="less=='true'" ng-click='tenless()'>3 anuncios menos</button>
+                <button class="btn btn-primary pull-right" ng-click='tenmore()'>3 anuncios más</button>
+            </div>
         </div>
     </div>
+</div>
 </div>

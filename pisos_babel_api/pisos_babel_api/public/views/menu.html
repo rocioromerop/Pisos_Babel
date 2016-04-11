@@ -30,7 +30,9 @@
                 <li ng-class="getClassForItem(paths.login)" ng-show="userState=='no-logged'">
                     <a href="#{{::paths.login}}">Autenticarse</a>
                 </li>
-                <button type="button" ng-show="userState=='logged'" class="btn btn-primary pull-right" ng-click="desconectarse()">Desconectarse</button>
+                <li>
+                    <button type="button" ng-show="userState=='logged'" class="btn btn-primary pull-right" ng-click="desconectarse()" style="margin-top: 8px">Desconectarse</button>
+                </li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->

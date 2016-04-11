@@ -13,5 +13,7 @@ angular.module("pisosBabel").controller("AppController", ["$scope", "$location",
         $scope.model = { // Representación modelo
             title: ""
         };
+
+        AuthService.logoutUser();
     }
 ]);
