@@ -32,6 +32,9 @@ angular.module('pisosBabel').service('searchService', ['APIClient', '$q', functi
         if(filtros.numeroHabitaciones != undefined){
             enviar = enviar + '&numeroHabitaciones=' + filtros.numeroHabitaciones ;
         }
+        if(filtros.codigoPostal != undefined){
+            enviar = enviar + '&codigoPostal=' + filtros.codigoPostal;
+        }
 
         console.log('ENVIAR: ', enviar);
         APIClient.getAnunciosFiltrados(enviar).then(

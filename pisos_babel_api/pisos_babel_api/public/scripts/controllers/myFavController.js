@@ -1,4 +1,4 @@
-angular.module('pisosBabel').controller('myFavController', ['URL','$location', 'paths', '$scope', "APIClient", 'AuthService', function(URL, $location, paths, $scope, APIClient, AuthService) {
+angular.module('pisosBabel').controller('myFavController', ['URL', '$location', 'paths', '$scope', "APIClient", 'AuthService', function(URL, $location, paths, $scope, APIClient, AuthService) {
 
     $scope.model = [];
 
@@ -7,6 +7,11 @@ angular.module('pisosBabel').controller('myFavController', ['URL','$location', '
     if (usuarioAutenticado == undefined) {
         $scope.uiState = 'noAuth';
     } else {
+
+        if (AuthService.getFav() == undefined) {
+            console.log("UNDEFINED");
+        }
+
         var myFav = AuthService.getFav();
 
         // Tengo que obtener todos los anuncios con todos los IDs -> llamadas a la api con esos ids
@@ -14,14 +19,19 @@ angular.module('pisosBabel').controller('myFavController', ['URL','$location', '
         var cadaFav = myFav.split(',');
 
         $scope.uiState = 'loading';
-        if (cadaFav[0] == '') {
+        if (cadaFav == undefined) {
             $scope.uiState = 'blank';
         } else {
             for (var i in cadaFav) {
                 APIClient.getAnuncio(cadaFav[i]).then(
                     function(data) {
-                        $scope.model.push(data.rows[0]);
-                        $scope.uiState = 'ideal';
+                        if (data.rows == undefined) {
+                            $scope.uiState = 'blank';
+                        } else {
+
+                            $scope.model.push(data.rows[0]);
+                            $scope.uiState = 'ideal';
+                        }
                     },
                     function(data) {
                         $scope.uiState = 'error';
