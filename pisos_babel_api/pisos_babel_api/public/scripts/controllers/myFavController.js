@@ -23,7 +23,6 @@ angular.module('pisosBabel').controller('myFavController', ['URL', '$location', 
                         if (data.rows == undefined) {
                             $scope.uiState = 'blank';
                         } else {
-
                             $scope.model.push(data.rows[0]);
                             $scope.uiState = 'ideal';
                         }

@@ -2,17 +2,19 @@
     <h1 type="text">Autenticación:</h1>
     <div ng-show="userState=='logged'" class="alert alert-success" role="alert">Se ha autenticado correctamente! Bienvenido! :D</div>
     <div ng-show="userState=='no-logged'" class="alert alert-danger" role="alert">Error en la autenticación: usuario o contraseña no coinciden.</div>
-    <div class="input-group">
-        <span class="input-group-addon" id="basic-addon1">Usuario</span>
-        <input type="text" ng-model="model.name" class="form-control" placeholder="Usuario" aria-describedby="basic-addon1">
-    </div>
-    <p></p>
-    <div class="input-group">
-        <span class="input-group-addon">Contraseña</span>
-        <input type="password" ng-model="model.pass" class="form-control" placeholder="Contraseña" aria-describedby="basic-addon1">
-    </div>
-    <p></p>
-    <div>
-        <button type="button" class="btn btn-primary pull-right" ng-click="conectarse()">Conectarse</button>
+    <div ng-show="uiState === 'no-correcto'">
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">Usuario</span>
+            <input type="text" ng-model="model.name" class="form-control" placeholder="Usuario" aria-describedby="basic-addon1">
+        </div>
+        <p></p>
+        <div class="input-group">
+            <span class="input-group-addon">Contraseña</span>
+            <input type="password" ng-model="model.pass" class="form-control" placeholder="Contraseña" aria-describedby="basic-addon1">
+        </div>
+        <p></p>
+        <div>
+            <button type="button" class="btn btn-primary pull-right" ng-click="conectarse()">Conectarse</button>
+        </div>
     </div>
 </div>
