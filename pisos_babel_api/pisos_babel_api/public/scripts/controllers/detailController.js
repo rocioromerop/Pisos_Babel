@@ -18,7 +18,11 @@ angular.module('pisosBabel').controller('detailController', ['paths', '$scope', 
     // Buscar en la base de datos el id del anuncio específico que quiero ver
     APIClient.getAnuncio($routeParams.id).then(
         function(data) {
-            if (data.rows[0].amueblado == 'false') {
+            if(data.rows == undefined){
+                $scope.uiState = 'error';
+            }
+            else{
+                if (data.rows[0].amueblado == 'false') {
                 data.rows[0].amueblado = 'sí';
             } else {
                 data.rows[0].amueblado = 'no';
@@ -45,6 +49,7 @@ angular.module('pisosBabel').controller('detailController', ['paths', '$scope', 
                     $scope.uiState = "error";
                 }
             );
+            }
         },
         function(data) {
             $scope.uiState = 'error';
