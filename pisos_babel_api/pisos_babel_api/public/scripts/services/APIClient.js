@@ -28,7 +28,6 @@ angular.module("pisosBabel").service("APIClient", ["$http", "$q", "$filter", "ap
 
     this.getMyAnuncios = function(usuarioAutenticado) {
         var url = apiPaths.pisos + '/?usuarioSubida=' + usuarioAutenticado;
-        console.log(url);
         return this.apiRequest(url);
     }
 
@@ -88,7 +87,6 @@ angular.module("pisosBabel").service("APIClient", ["$http", "$q", "$filter", "ap
     this.addFav = function(idUser, myFav) {
         var deferred = $q.defer();
         var url = apiPaths.usuarios + '/' + idUser;
-        console.log("myFav", myFav);
         $http.put(url, myFav).then(
             function(response) {
                 deferred.resolve(response.data);
@@ -103,7 +101,6 @@ angular.module("pisosBabel").service("APIClient", ["$http", "$q", "$filter", "ap
     this.removeFav = function(idUser, myFav) {
         var deferred = $q.defer();
         var url = apiPaths.usuarios + '/' + idUser;
-        console.log("myFav", myFav);
         $http.put(url, myFav).then(
             function(response) {
                 deferred.resolve(response.data);

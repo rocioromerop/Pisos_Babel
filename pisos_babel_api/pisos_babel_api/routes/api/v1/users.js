@@ -103,7 +103,7 @@ router.put('/:id', function(req, res) {
 
     var opt = false;
 
-    if (req.body.opt != undefined) {
+    if (req.body.options != undefined) {
         opt = true;
     }
 

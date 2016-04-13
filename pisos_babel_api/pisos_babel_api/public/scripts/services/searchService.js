@@ -40,12 +40,10 @@ angular.module('pisosBabel').service('searchService', ['APIClient', '$q', functi
             enviar = enviar + '&start=' + filtros.start + '&limit=' + filtros.limit;
         }
 
-        console.log('ENVIAR: ', enviar);
 
         APIClient.getAnunciosFiltrados(enviar).then(
             function(response) {
                 deferred.resolve(response);
-                console.log('DATA DE SEARCH SERVICE', response);
             },
             function(response) {
                 deferred.reject(response);

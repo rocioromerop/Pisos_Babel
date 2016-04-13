@@ -33,10 +33,7 @@ angular.module("pisosBabel").service("AuthService", ["$window", "APIClient", "$r
         $window.localStorage['fav'] = $window.localStorage['fav'] + ',' + fav;
     }
     this.removeFav = function(fav) {
-        console.log($window.localStorage['fav']);
-        console.log('fav que recibe authservice', fav);
         $window.localStorage['fav'] = $window.localStorage['fav'].replace(fav.toString(), '');
-        console.log($window.localStorage['fav']);
     }
     this.getId = function() {
         return $window.localStorage['id'];
